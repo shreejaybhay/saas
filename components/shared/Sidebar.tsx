@@ -51,8 +51,7 @@ const Sidebar = () => {
             </ul>
 
             <ul>
-
-            {navLinks.slice(6).map((link) => {
+              {navLinks.slice(6).map((link) => {
                 const isActive = link.route === pathname;
 
                 return (
@@ -85,8 +84,35 @@ const Sidebar = () => {
           </SignedIn>
 
           <SignedOut>
-            <Button asChild className="button bg-purple-gradient bg-current">
-              <Link href="/sign-in">Login</Link>
+            <ul className="sidebar-nav_elements">
+              {navLinks.slice(0, 6).map((link) => {
+                const isActive = link.route === pathname;
+
+                return (
+                  <li
+                    key={link.route}
+                    className={`sidebar-nav_element group ${
+                      isActive
+                        ? "bg-purple-gradient text-white"
+                        : "text-gray-700"
+                    }`}
+                  >
+                    <Link className="sidebar-link" href={link.route}>
+                      <Image
+                        src={link.icon}
+                        alt="logo"
+                        width={24}
+                        height={24}
+                        className={`${isActive && "brightness-200"}`}
+                      />
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <Button className="button">
+              <Link href='/sign-in'>Log In</Link>
             </Button>
           </SignedOut>
         </nav>
